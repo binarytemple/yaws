@@ -19,7 +19,7 @@ init([_Arg, Params]) ->
     {ok, #state{}}.
 
 handle_open(WSState, State) ->
-    yaws_websockets:send(WSState, {text, <<"Welcome !">>}),
+    yaws_websockets:send(WSState, {text, <<"Welcome to you!">>}),
     {ok, State}.
 
 handle_message({text, <<"bye">>}, #state{nb_texts=N, nb_bins=M}=State) ->

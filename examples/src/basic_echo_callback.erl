@@ -11,7 +11,7 @@
 -export([say_hi/1]).
 
 handle_message({text, <<"bye">>}) ->
-    io:format("User said bye.~n", []),
+    io:format("How sad, the user said bye.~n", []),
     {close, normal};
 
 handle_message({text, <<"something">>}) ->

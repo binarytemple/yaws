@@ -15,6 +15,21 @@ html_body(WebSocketLocation) ->
 <head>
   <title>Basic WebSocket Example</title>
   <script type=\"text/javascript\">
+
+    document.onkeypress = function(event){
+            var text = event.keyCode;
+            var msg=$('codes');
+            var spanText = document.createElement('span');
+            spanText.className='text';
+            spanText.innerHTML=text;
+            var lineBreak = document.createElement('br');
+            msg.appendChild(spanText);
+            msg.appendChild(lineBreak);
+            msg.scrollTop = msg.scrollHeight - msg.clientHeight;
+
+    return true;
+    }
+     
      var WS = false;
      if (window.WebSocket) WS = WebSocket;
      if (!WS && window.MozWebSocket) WS = MozWebSocket;
@@ -89,8 +104,7 @@ html_body(WebSocketLocation) ->
   <div id=\"options\">
     <input id='extVersion' type='checkbox'/> Use extended version<br/>
     <input id='keepalive' type='checkbox'/> Enable keepalive timer<br/>
-    KeepAlive timeout (in milliseconds) <input id='timeout' type='text'  size='5'/>
-  </div>
+
   <div id=\"connect\">
      <input id='cA' class='button' type='submit' name='connect' value='Connect'/>
   </div>
@@ -100,10 +114,12 @@ html_body(WebSocketLocation) ->
     <input id='sendB' class='button' type='submit' name='connect' value='Send'/>
   </div>
   <div id=\"msgs\"></div>
+  <div id=\"codes\"></div>
 
   <script type='text/javascript'>
     $('cA').onclick = function(event) { client.connect(); return false; };
     $('sendB').onclick = function(event) { client.chat($F('phrase')); $('phrase').value=''; $('phrase').focus(); return false; };
+    $('phrase').onkeypress = function(event) { if (event.keyCode == 13) {    client.chat($F('phrase')); $('phrase').value=''; $('phrase').focus(); return false; }};
  </script>
   </body>
 </html>".
